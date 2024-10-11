@@ -12,6 +12,7 @@ $regent = new Hotel ("Regent", "***", "61 Rue Dauphine", "75006", "Paris");
 
 // Rooms
 $room1 = new Room (1, 2, true, 120, false, $hilton);
+$room2 = new Room (2, 2, true, 120, true, $hilton);
 
 
 
@@ -21,6 +22,8 @@ $client2 = new Client ("Virgile", "GIBELLO", "virgile@elan-formaiton.fr");
 
 // Reservations - après avoir déclaré les variables dont on a besoin
 $booking1 = new Reservation ("2021-01-01", "2021-01-01", $client1, $room1);
+$booking2 = new Reservation ("2021-01-18", "2021-01-22", $client2, $room1);
+$booking3 = new Reservation ("2021-02-18", "2021-02-22", $client2, $room2);
 
 
 // var_dump($hilton, $regent);

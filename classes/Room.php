@@ -70,7 +70,7 @@ class Room {
         return $this;
     }
  
-    public function getWifi() : string
+    public function getWifi() : bool
     {
         return $this->wifi;
     }

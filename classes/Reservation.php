@@ -19,7 +19,7 @@ class Reservation {
     
     public function getBookingBegin() : DateTime
     {
-        return $this->bookingBegin->format("d-m-Y");
+        return $this->bookingBegin;
     }
 
     public function setBookingBegin($bookingBegin)
@@ -31,7 +31,7 @@ class Reservation {
 
     public function getBookingEnd() : DateTime
     {
-        return $this->bookingEnd->format("d-m-Y");
+        return $this->bookingEnd;
     }
 
     public function setBookingEnd($bookingEnd)
@@ -69,5 +69,9 @@ class Reservation {
     // Fonctions
 
 
+    // toString
 
+    public function __toString() {
+        return " du ".$this->getBookingBegin()->format("d-m-Y")." au ".$this->getBookingEnd()->format("d-m-Y");
+    }
 }
