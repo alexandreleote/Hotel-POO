@@ -8,3 +8,7 @@ Afficher différents éléments dont :
 - les réservations dans l'hôtel;
 - les réservations du client;
 - le statut des chambres de l'hôtel.
+
+
+Exemple du rendu de l'exercice : 
+![image](https://github.com/user-attachments/assets/ef53934d-84fb-43ee-b4e6-9b1c02faeaea)
