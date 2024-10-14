@@ -2,7 +2,7 @@
 
 class Room {
     private int $roomNumber; // Numéro de chambre
-    private int $bedNumber;
+    private int $bedNumber; // Nombre de lits dans la cham
     private bool $isBooked; // Statut de disponibilité
     private float $price; // Prix
     private bool $wifi; // Posséde le wifi ou non 
@@ -113,6 +113,7 @@ class Room {
         $this->reservations[] = $reservation;
     }
 
+    // Ajout de la chambre à la réservation
     public function addRoom(Reservation $room) {
         $this->reservations[] = $room; 
     }
@@ -121,7 +122,7 @@ class Room {
     // toString()
 
     public function __toString() {
-        return "Chambre $this->roomNumber";
+        return $this->roomNumber;
     }
 
 

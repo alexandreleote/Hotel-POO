@@ -41,7 +41,7 @@ class Reservation {
         return $this;
     }
 
-    public function getClient() : string
+    public function getClient() : Client
     {
         return $this->client;
     }
@@ -53,7 +53,7 @@ class Reservation {
         return $this;
     }
 
-    public function getRoom() : string
+    public function getRoom() : Room
     {
         return $this->room;
     }
@@ -64,10 +64,6 @@ class Reservation {
 
         return $this;
     }
-
-
-    // Fonctions
-
 
     // toString
 

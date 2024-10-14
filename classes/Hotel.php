@@ -124,25 +124,27 @@ class Hotel {
         return count($this->rooms);
     }
 
-    // Créer un parc de chambres
-
     // Compter nombre de chambres réservées
     public function countReservedRooms () {
         $result = 0;
-        foreach ($this->rooms as $room){ // Foreach sur array rooms[] qui indique le nombre de chambres 
-            if ($room->getIsBooked() == true){ // Si la chambre est réservée / true = alors on incrémente de 1
+        // Foreach sur array rooms[] qui indique le nombre de chambres 
+        foreach ($this->reservations as $reservation) {
+            $reservation->getRoom()->setIsbooked(true); 
+            // Si la chambre est réservée / true = alors on incrémente de 1
+            if ($reservation->getRoom()->getIsBooked() == true){ 
                 $result +=1;
             }
         }
-        return $result; // Si aucune chambre n'est réservée on retourne la valeur initiale
+        // Si aucune chambre n'est réservée on retourne la valeur initiale
+        return $result; 
     }
 
     // Compter nombre de chambres dipos
     public function countAvailableRooms() {
-        $result = $this->countRooms()-$this->countReservedRooms(); // On soustrait le nombre de chambre réservée au nombre total
+        // On soustrait le nombre de chambre réservée au nombre total
+        $result = $this->countRooms()-$this->countReservedRooms(); 
         return $result;
     }
-
 
     // Informations de l'établissement
     public function getInfos() {
@@ -157,11 +159,13 @@ class Hotel {
     // Afficher les réservations
     public function showReservations () {
         $result = "<h3> Réservations de l'hôtel $this</h3>";
-        if ($this->countReservedRooms() > 0){ // Si le nombre de réservation est supérieur à 0 alors on affiche les infos suivants
-            $result .= $this->countReservedRooms()." ".mb_strtoupper("réservations")."<br>";
+        $booking = $this->countReservedRooms();
+        // Si le nombre de réservation est supérieur à 0 alors on affiche les infos suivants
+        if ($booking > 0){ 
+            $result .= "<span class='badge text-bg-success'>".$this->countReservedRooms()." ".mb_strtoupper("réservations")."</span><br>";
             // On ajoute le nom du client ayant réservé avec les informations associées à la réservation
             foreach ($this->reservations as $reservation) {
-                $result .= $reservation->getClient()." - ".$reservation->getRoom()." - ".$reservation."<br>";
+                $result .= $reservation->getClient()." - Chambre ".$reservation->getRoom()." - ".$reservation."<br>";
             }
         } else {
             $result .= "Aucune réservation !<br><br>";
@@ -172,7 +176,8 @@ class Hotel {
     // Afficher Wifi d'une chambre dans le status
     public function showHasWifi($room) {
         if ($room->getWifi() == true) {
-            return "<img src='./ressources/wifi-icon.png' alt='icône du réseau wifi disponible'width=32 height=32 >"; // Si la valeur du WiFi est true on retourne l'icone
+            // On affiche l'icône du WiFi si la chambre est équipée de cela
+            return "<img src='./ressources/wifi-icon.png' alt='icône du réseau wifi disponible'width=32 height=32 >"; 
         } else {
             return "";
         }
@@ -181,19 +186,18 @@ class Hotel {
    // Fonction de disponibilité
     public function isRoomBooked($room){
         if ($room->getIsBooked() == true) {
-            return mb_strtoupper("réservée"); // Si la valeur de la chambre est true on retourne qu'elle n'est pas disponible
+            // Si la valeur de la chambre est true on retourne qu'elle n'est pas disponible
+            return "<span class='badge text-bg-danger'>".mb_strtoupper("réservée")."</span>"; 
         } else {
-            return mb_strtoupper("disponible");
+            return "<span class='badge text-bg-success'>".mb_strtoupper("disponible")."</span>";
         }
     }
-
-
-
 
     // Afficher les statuts des chambres
     public function showRoomsStatus () {
         $result = "Statuts des chambres de <b>".$this."</b>";
-        $result .= "<br><br><table>
+        // On établit la table pour afficher les éléments nécessaires
+        $result .= "<br><br><table class='table table-striped'>
                     <thead>
                         <tr>
                             <th>".mb_strtoupper("chambre")."</th> 
@@ -203,8 +207,10 @@ class Hotel {
                         </tr>
                     </thead>
                     <tbody>";
-                    foreach($this->rooms as $room){ // Pour afficher les éléments de la chambre en question
-                        $result .= // On récupère le numéro de la chambre puis son prix associer, on appelle notre méthode pour savoir si la chambre dispose d'une connexion WiFi et si la chambre est dispo
+                    // Pour afficher les éléments de la chambre en question
+                    foreach($this->rooms as $room){ 
+                        // On récupère le numéro de la chambre puis son prix associer, on appelle notre méthode pour savoir si la chambre dispose d'une connexion WiFi et si la chambre est dispo
+                        $result .= 
                             "<tr>
                                 <td>Chambre ".$room->getRoomNumber()."</td>
                                 <td>".$room->getPrice()." €</td>
